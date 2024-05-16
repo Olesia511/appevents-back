@@ -6,6 +6,23 @@ const createParticipant = async (req, res) => {
   res.status(201).json(addedParticipant);
 };
 
+const getAllParticipants = async (req, res) => {
+  const { _id: owner } = req.params;
+  // const { page = 1, limit = 20 } = req.query;
+
+  // const skip = (page - 1) * limit;
+
+  const allParticipants = await Participant.find(
+    owner,
+    "-createdAt -updatedAt"
+    // { skip, limit }
+  ).populate("event");
+
+  res.json(allParticipants);
+};
+
 export default {
   createParticipant: ctrlWrapper(createParticipant),
+
+  getAllParticipants: ctrlWrapper(getAllParticipants),
 };

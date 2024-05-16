@@ -7,15 +7,21 @@ const createParticipant = async (req, res) => {
 };
 
 const getAllParticipants = async (req, res) => {
-  const { _id: idEvent } = req.params;
+  const id = req.params.id;
 
-  const allParticipants = await Participant.find({ idEvent }).populate("event", null, null, { strictPopulate: false });
+  const allParticipants = await Participant.find({ idEvent: id }, "-createdAt -updatedAt").populate(
+    "event",
+    null,
+    null,
+    {
+      strictPopulate: false,
+    }
+  );
 
   res.json(allParticipants);
 };
 
 export default {
   createParticipant: ctrlWrapper(createParticipant),
-
   getAllParticipants: ctrlWrapper(getAllParticipants),
 };

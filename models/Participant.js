@@ -22,10 +22,6 @@ const addParticipantsSchema = new Schema(
       required: true,
     },
     idEvent: {
-      type: String,
-      required: true,
-    },
-    event: {
       type: Schema.Types.ObjectId,
       ref: "event",
       required: true,

@@ -3,5 +3,5 @@ import participantsCtr from "../controllers/participantsController.js";
 import isEmptyBody from "../middlewares/isEmptyBody.js";
 
 const router = express.Router();
-router.post("/", participantsCtr.createParticipant);
+router.post("/", isEmptyBody, participantsCtr.createParticipant);
 export default router;

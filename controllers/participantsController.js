@@ -8,15 +8,8 @@ const createParticipant = async (req, res) => {
 
 const getAllParticipants = async (req, res) => {
   const { _id: idEvent } = req.params;
-  // const { page = 1, limit = 20 } = req.query;
 
-  // const skip = (page - 1) * limit;
-
-  const allParticipants = await Participant.find(
-    idEvent,
-    "-createdAt -updatedAt"
-    // { skip, limit }
-  ).populate("event");
+  const allParticipants = await Participant.find({ idEvent }).populate("event", null, null, { strictPopulate: false });
 
   res.json(allParticipants);
 };
